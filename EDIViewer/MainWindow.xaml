@@ -1,0 +1,35 @@
+﻿<Window x:Class="EDIViewer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <Button Click="Button_Click">Load Remit</Button>
+        </StackPanel>
+        <DockPanel>
+            <ListBox DockPanel.Dock="Left" Name="lbClaim"  ItemsSource="{Binding ClaimPaymentInformations}"></ListBox>
+            <DockPanel DataContext="{Binding ElementName=lbClaim, Path=SelectedValue}">
+                <ListBox DockPanel.Dock="Left" ItemsSource="{Binding PropertyProviderInfos}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding PropertyName}"></TextBlock>
+                                <TextBlock Text="{Binding Value}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <ListBox ItemsSource="{Binding ShowLines}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding LineNumber}"></TextBlock>
+                                <TextBlock Text="{Binding RawText}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+        </DockPanel>
+    </DockPanel>
+</Window>
