@@ -31,8 +31,8 @@ namespace EDIViewer
             int i = 0;
 
             var aasdf = from s in fileName
-                        let ss = s.Trim().Trim("~".ToCharArray()).Split("*".ToCharArray())
-                        select new FileLine(i++, ss[0], ss,s);
+                        let ss = s.Trim().Trim("~".ToCharArray())
+                        select new EdiFileLine(i++, "*".ToCharArray(), ss);
 
             FileInfo infod = FileInfo.Load(aasdf);
             this.DataContext = infod;

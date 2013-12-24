@@ -54,6 +54,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EdiFileLine.cs" />
+    <Compile Include="Enums\EdiDataType.cs" />
     <Compile Include="PropertyProvider.cs" />
     <Compile Include="Resource1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -69,7 +71,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ClaimPaymentInformation.cs" />
-    <Compile Include="ClaimPropertyProvider.cs" />
     <Compile Include="FileParser835.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

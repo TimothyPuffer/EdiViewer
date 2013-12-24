@@ -8,12 +8,12 @@ namespace EDIViewer
     public class PropertyProvider
     {
         private List<PropertyProviderInfo> _myPropertyInfo = new List<PropertyProviderInfo>();
-        public void AddPropertyInfo(IEnumerable<FileLine> lines, string propertyName, string id, int position, EdiDataType ediType)
+        public void AddPropertyInfo(IEnumerable<EdiFileLine> lines, string propertyName, string id, int position, EdiDataType ediType)
         {
             _myPropertyInfo.Add(new PropertyProviderInfo() { Lines = lines, PropertyName = propertyName, Id = id, Position = position, EdiType = ediType });
         }
 
-        public void AddPropertyInfo(IEnumerable<FileLine> lines, string propertyName, string id, string refPosition, int position, EdiDataType ediType)
+        public void AddPropertyInfo(IEnumerable<EdiFileLine> lines, string propertyName, string id, string refPosition, int position, EdiDataType ediType)
         {
             _myPropertyInfo.Add(new PropertyProviderInfo() { Lines = lines, PropertyName = propertyName, Id = id, Position = position, RefPosition = refPosition, EdiType = ediType });
         }
@@ -28,7 +28,7 @@ namespace EDIViewer
 
     public class PropertyProviderInfo
     {
-        public IEnumerable<FileLine> Lines { get; set; }
+        public IEnumerable<EdiFileLine> Lines { get; set; }
         public string PropertyName { get; set; }
         public string Id { get; set; }
         public string RefPosition { get; set; }

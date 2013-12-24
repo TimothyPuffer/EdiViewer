@@ -43,7 +43,7 @@ namespace EDIViewer
             }
         }
 
-        public IEnumerable<FileLine> ShowLines
+        public IEnumerable<EdiFileLine> ShowLines
         {
             get
             {

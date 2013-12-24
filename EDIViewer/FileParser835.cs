@@ -8,7 +8,7 @@ namespace EDIViewer
     public class FileInfo : ParentSegment<FileSegment>
     {
         private FileInfo() { }
-        public static FileInfo Load(IEnumerable<FileLine> lines)
+        public static FileInfo Load(IEnumerable<EdiFileLine> lines)
         {
             FileInfo lastFileInfo = new FileInfo();
 
@@ -18,7 +18,7 @@ namespace EDIViewer
             bool firstN1Segment = true;
             ClaimPaymentInformation lastClaimPaymentInformation = null;
 
-            Action<FileLine> currentSegment = null;
+            Action<EdiFileLine> currentSegment = null;
             foreach (var l in lines)
             {
                 switch (l.Id)
@@ -146,9 +146,9 @@ namespace EDIViewer
 
     public class LeafSegment
     {
-        private List<FileLine> _segments = new List<FileLine>();
+        private List<EdiFileLine> _segments = new List<EdiFileLine>();
 
-        public IEnumerable<FileLine> Lines
+        public IEnumerable<EdiFileLine> Lines
         {
             get
             {
@@ -157,7 +157,7 @@ namespace EDIViewer
             }
         }
 
-        public Action<FileLine> AddActionSegment()
+        public Action<EdiFileLine> AddActionSegment()
         {
             return x => this._segments.Add(x);
         }
@@ -177,24 +177,10 @@ namespace EDIViewer
         }
     }
 
-    public class FileLine
-    {
-        public FileLine(int lineNumber, string id, string[] line,string rawText)
-        {
-            LineNumber = lineNumber;
-            Id = id;
-            Text = line;
-            RawText = rawText;
-        }
-        public int LineNumber { get; private set; }
-        public string Id { get; private set; }
-        public string[] Text { get; private set; }
-        public string RawText { get; private set; }
-    }
 
     public class ValueSegment
     {
-        public ValueSegment(string value, int position, FileLine line,EdiDataType dataType)
+        public ValueSegment(string value, int position, EdiFileLine line,EdiDataType dataType)
         {
             Value = value;
             Position = position;
@@ -204,7 +190,7 @@ namespace EDIViewer
 
         public string Value { get; private set; }
         public int Position { get; private set; }
-        public FileLine Line { get; private set; }
+        public EdiFileLine Line { get; private set; }
         public EdiDataType DateType { get; private set; }
     }
 }
