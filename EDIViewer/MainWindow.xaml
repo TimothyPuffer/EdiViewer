@@ -24,7 +24,15 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding LineNumber}"></TextBlock>
-                                <TextBlock Text="{Binding RawText}"></TextBlock>
+                                <ItemsControl ItemsSource="{Binding TextWithSeparator}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
