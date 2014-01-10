@@ -38,5 +38,9 @@ namespace EDIViewer
             this.DataContext = infod;
 
         }
+
+        private void StackPanel_MouseEnter(object sender, MouseEventArgs e)
+        {
+        }
     }
 }

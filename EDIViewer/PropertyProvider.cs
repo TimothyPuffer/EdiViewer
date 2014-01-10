@@ -34,7 +34,7 @@ namespace EDIViewer
         public string RefPosition { get; set; }
         public int Position { get; set; }
         public EdiDataType EdiType { get; set; }
-        public string Value
+        public EdiMonad ValueMonad
         {
             get
             {
@@ -43,13 +43,32 @@ namespace EDIViewer
                            select l;
 
                 if (!temp.Any())
-                    return string.Empty;
+                    return new EdiMonad(string.Empty, EdiFindStatus.NoLine, EdiType);
 
                 if (temp.First().Text.Length < Position)
-                    return string.Empty;
+                    return new EdiMonad(string.Empty, EdiFindStatus.NoPosition, EdiType);
 
-                return temp.First().Text[Position];
+                string tValue = temp.First().Text[Position];
+
+                if (string.IsNullOrEmpty(tValue))
+                    return new EdiMonad(string.Empty, EdiFindStatus.Blank, EdiType);
+                else
+                    return new EdiMonad(tValue, EdiFindStatus.HasValue, EdiType);
             }
         }
+    }
+
+    public class EdiMonad
+    {
+        public EdiMonad(string value,EdiFindStatus status, EdiDataType datatype)
+        {
+            Value = value;
+            FindStatus = status;
+            DataType = datatype;
+
+        }
+        public string Value { get; private set; }
+        public EdiFindStatus FindStatus { get; private set; }
+        public EdiDataType DataType { get; private set; }
     }
 }

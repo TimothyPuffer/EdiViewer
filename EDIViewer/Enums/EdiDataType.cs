@@ -15,4 +15,13 @@ namespace EDIViewer
         Time = 6,
         Binary = 7
     }
+
+    public enum EdiFindStatus
+    {
+        HasValue = 1,
+        NoLine = 2,
+        NoPosition = 3,
+        Blank = 4
+
+    }
 }
