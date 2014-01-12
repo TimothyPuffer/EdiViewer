@@ -24,4 +24,10 @@ namespace EDIViewer
         Blank = 4
 
     }
+
+    public enum FileLineHighLight
+    {
+        None = 0,
+        Yellow = 1
+    }
 }

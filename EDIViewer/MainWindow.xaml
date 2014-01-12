@@ -1,8 +1,10 @@
 ﻿<Window x:Class="EDIViewer.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        xmlns:l="clr-namespace:EDIViewer"
+        Title="MainWindow" Height="350" Width="825">
     <Window.Resources>
+        <l:HighLightConverter x:Key="converter" />
         <Style TargetType="ItemsControl">
             <Setter Property="Margin" Value="10,0,10,0"></Setter>
         </Style>
@@ -12,24 +14,23 @@
             <Button Click="Button_Click">Load Remit</Button>
         </StackPanel>
         <DockPanel>
-            <ListBox DockPanel.Dock="Left" Name="lbClaim"  ItemsSource="{Binding ClaimPaymentInformations}"></ListBox>
+            <ListBox DockPanel.Dock="Left" Name="lbClaim"  ItemsSource="{Binding ClaimPaymentInformations}" SelectionChanged="lbClaim_SelectionChanged"></ListBox>
             <DockPanel DataContext="{Binding ElementName=lbClaim, Path=SelectedValue}">
                 <ItemsControl DockPanel.Dock="Left" ItemsSource="{Binding PropertyProviderInfos}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" MouseEnter="StackPanel_MouseEnter">
+                            <StackPanel Orientation="Horizontal" MouseLeave="StackPanel_MouseLeave" MouseEnter="StackPanel_MouseEnter">
                                 <TextBlock Width="150" Text="{Binding PropertyName}"></TextBlock>
                                 <TextBlock Text="{Binding Path=ValueMonad.Value}"></TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-                <ItemsControl ItemsSource="{Binding ShowLines}">
+                <ItemsControl Name="icRawText">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding LineNumber}"></TextBlock>
-                                <ItemsControl ItemsSource="{Binding TextWithSeparator}">
+                                <ItemsControl ItemsSource="{Binding}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <StackPanel Orientation="Horizontal">
@@ -38,7 +39,9 @@
                                     </ItemsControl.ItemsPanel>
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding}"></TextBlock>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding Value}" Background="{Binding Path=Highlight,Converter={StaticResource converter}}"></TextBlock>
+                                            </StackPanel>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>

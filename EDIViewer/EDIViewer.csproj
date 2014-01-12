@@ -57,6 +57,7 @@
     <Compile Include="EdiFileLine.cs" />
     <Compile Include="Enums\EdiDataType.cs" />
     <Compile Include="PropertyProvider.cs" />
+    <Compile Include="RawLineCollection.cs" />
     <Compile Include="Resource1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -107,6 +108,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ToDue.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

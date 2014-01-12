@@ -1,0 +1,5 @@
+﻿Make PropertyProviderInfo immutiable
+
+Add virtual override method on ParentSegment for the segments that below to the Segment | remove ClaimPaymentInformations
+
+Split up and rename enums 

@@ -176,21 +176,4 @@ namespace EDIViewer
             }
         }
     }
-
-
-    public class ValueSegment
-    {
-        public ValueSegment(string value, int position, EdiFileLine line,EdiDataType dataType)
-        {
-            Value = value;
-            Position = position;
-            Line = line;
-            DateType = dataType;
-        }
-
-        public string Value { get; private set; }
-        public int Position { get; private set; }
-        public EdiFileLine Line { get; private set; }
-        public EdiDataType DateType { get; private set; }
-    }
 }

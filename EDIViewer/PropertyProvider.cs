@@ -28,6 +28,7 @@ namespace EDIViewer
 
     public class PropertyProviderInfo
     {
+        private static string EMPTY_VALUE = string.Empty;
         public IEnumerable<EdiFileLine> Lines { get; set; }
         public string PropertyName { get; set; }
         public string Id { get; set; }
@@ -43,32 +44,35 @@ namespace EDIViewer
                            select l;
 
                 if (!temp.Any())
-                    return new EdiMonad(string.Empty, EdiFindStatus.NoLine, EdiType);
+                    return new EdiMonad(EMPTY_VALUE, EdiFindStatus.NoLine, EdiType, null);
 
                 if (temp.First().Text.Length < Position)
-                    return new EdiMonad(string.Empty, EdiFindStatus.NoPosition, EdiType);
+                    return new EdiMonad(EMPTY_VALUE, EdiFindStatus.NoPosition, EdiType, null);
 
-                string tValue = temp.First().Text[Position];
+                var tLine = temp.First();
+                var tValue = tLine.Text[Position];
 
                 if (string.IsNullOrEmpty(tValue))
-                    return new EdiMonad(string.Empty, EdiFindStatus.Blank, EdiType);
+                    return new EdiMonad(EMPTY_VALUE, EdiFindStatus.Blank, EdiType, tLine);
                 else
-                    return new EdiMonad(tValue, EdiFindStatus.HasValue, EdiType);
+                    return new EdiMonad(tValue, EdiFindStatus.HasValue, EdiType, tLine);
             }
         }
     }
 
     public class EdiMonad
     {
-        public EdiMonad(string value,EdiFindStatus status, EdiDataType datatype)
+        public EdiMonad(string value,EdiFindStatus status, EdiDataType datatype,EdiFileLine line)
         {
             Value = value;
             FindStatus = status;
             DataType = datatype;
+            Line = line;
 
         }
         public string Value { get; private set; }
         public EdiFindStatus FindStatus { get; private set; }
         public EdiDataType DataType { get; private set; }
+        public EdiFileLine Line { get; private set; }
     }
 }
